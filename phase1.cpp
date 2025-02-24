@@ -1,7 +1,7 @@
-#include <iostream>
-#include <cstdint>
-#include <fstream>
-#include <sstream>
+#include <iostream> // Bibliothèque standard pour les flux d'entrée/sortie
+#include <cstdint> // Assure la portabilité des types d'entiers avec une largeur et un signe spécifiques sur différents systèmes
+#include <fstream> // Classe de flux d'entrée/sortie pour opérer sur des fichiers
+#include <sstream> // Classes de modèles pour les flux de chaînes de caractères
 
 // using namespace std;
 
@@ -110,22 +110,34 @@ void exec(const std::string& program_path){
     
             if (opcode == "SET") {
                 uint16_t valeur = parse_operand(ligne);
+                
                 if(valeur != 0 || ligne == "SET 0"){ // Vérifier si parse_operand retourne une erreur
                     registre = valeur;
                 }
-            } else if (opcode == "ADD") {
+            } 
+
+            else if (opcode == "ADD") {
                 uint32_t nouveau_registre = registre + operand;
                 registre = (nouveau_registre > 65535) ? 65535 : nouveau_registre;
-            } else if (opcode == "SUB") {
+            } 
+            
+            else if (opcode == "SUB") {
                 int nouveau_registre = registre - operand;
                 registre = (nouveau_registre < 0) ? 0 : nouveau_registre;
-            } else if (opcode == "PRINT") {
+            } 
+
+            else if (opcode == "PRINT") {
                 std::cout << registre << std::endl;
-            } else if (opcode == "IFNZ") {
+            } 
+
+            else if (opcode == "IFNZ") {
+
                 if (registre == 0) {
                     getline(fichier, ligne); // Sauter la ligne suivante
                 }
-            } else {
+            } 
+
+            else {
                 std::cerr << "| ERROR | Instruction inconnue!! -> [ " << opcode << " ]" << std::endl;
             }
         }
