@@ -16,7 +16,7 @@ $(EXEC): $(OBJ)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Nettoyage des fichiers objets et de l'exécutable
+# Nettoyage des fichiers objets et exe
 clean:
 	rm -f $(OBJ) $(EXEC)
 
